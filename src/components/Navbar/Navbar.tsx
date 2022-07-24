@@ -7,7 +7,13 @@ import logo from '../../assets/img/logo.gif';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useLogout } from '../../hooks/useLogout';
 
-const pages = ['股票', '随笔'];
+const pages = [{
+  label: '股票',
+  href: '/stock'
+}, {
+  label: '随笔',
+  href: '/'
+}];
 const userAuthOptions = [{
   label: '登录',
   href: '/login'
@@ -115,8 +121,8 @@ export default function Navbar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.label}>
+                  <Typography textAlign="center">{page.label}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -142,13 +148,19 @@ export default function Navbar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+              <Link
+                key={page.label}
+                href={page.href}
+                underline="none"
               >
-                {page}
-              </Button>
+                <Button
+                  key={page.label}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  {page.label}
+                </Button>
+              </Link>
             ))}
           </Box>
 
